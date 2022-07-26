@@ -1,7 +1,8 @@
 const path = require("path");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const miniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 module.exports = {
   entry: "./src/js/index.js",
   output: {
@@ -18,11 +19,16 @@ module.exports = {
       inject: "body",
       favicon: "./favicon.ico",
     }),
-    new miniCssExtractPlugin({
+    new MiniCssExtractPlugin({
       filename: "style.css",
     }),
   ],
+  module: {
+    rules: [
+      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
+    ],
+  },
   optimization: {
-    minimizer: [new TerserWebpackPlugin()],
+    minimizer: [new TerserWebpackPlugin(), new CssMinimizerPlugin()],
   },
 };
