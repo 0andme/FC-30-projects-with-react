@@ -57,3 +57,8 @@ npx eslint --init
 - [참고자료 - prettier demo ](https://prettier.io/playground/)
 - [참고자료 - eslint rules ](https://eslint.org/docs/latest/rules/)
 - [참고자료 - eslint demo](https://eslint.org/play/)
+
+#### vscode editor setting
+
+command+shift+P -> preferences open workspace settings
+[vscode 세팅 파일 settings.json](./.vscode/settings.json)
