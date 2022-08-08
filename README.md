@@ -62,3 +62,11 @@ npx eslint --init
 
 command+shift+P -> preferences open workspace settings
 [vscode 세팅 파일 settings.json](./.vscode/settings.json)
+
+#### 다크 모드 적용
+
+[Private class fields](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes/Private_class_fields)
+
+[Document.documentElement](https://developer.mozilla.org/ko/docs/Web/API/Document/documentElement)
+
+[Element.setAttribute()](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)
