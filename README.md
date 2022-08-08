@@ -70,3 +70,11 @@ command+shift+P -> preferences open workspace settings
 [Document.documentElement](https://developer.mozilla.org/ko/docs/Web/API/Document/documentElement)
 
 [Element.setAttribute()](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)
+
+#### 폰트 변경 기능
+
+document.body.style.fontFamily
+
+#### 이벤트 버블링
+
+[event.bubbles](https://developer.mozilla.org/ko/docs/Web/API/Event/bubbles)
