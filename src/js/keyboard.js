@@ -21,28 +21,10 @@ export class Keyboard {
     this.#switchEl.addEventListener("change", this.#onChangeTheme);
     this.#fontSelectEl.addEventListener("change", this.#onChangeFont);
     // 키 입력 핸들러
-    document.addEventListener("keydown", (event) => {
-      this.#keyboardEl
-        .querySelector(`[data-code=${event.code}]`)
-        ?.classList.add("active");
-      // 한글 입력 제어
-      this.#inputGroupEl.classList.toggle(
-        "error",
-        /[ㄱ-ㅎ|ㅏ-ㅣㅣ가-힣]/.test(event.key)
-      );
-    });
-    document.addEventListener("keyup", (event) => {
-      this.#keyboardEl
-        .querySelector(`[data-code=${event.code}]`)
-        ?.classList.remove("active");
-    });
+    document.addEventListener("keydown", this.#onKeyUp.bind(this));
+    document.addEventListener("keyup", this.#onKeyDown.bind(this));
     //  입력된 한글을 빈 스트링으로 변경
-    this.#inputEl.addEventListener("input", (event) => {
-      this.#inputEl.value = this.#inputEl.value.replace(
-        /[ㄱ-ㅎ|ㅏ-ㅣㅣ가-힣]/,
-        ""
-      );
-    });
+    this.#inputEl.addEventListener("input", this.#onInput);
   }
   // 테마 변경 핸들러
   #onChangeTheme(event) {
@@ -54,5 +36,24 @@ export class Keyboard {
   // 폰트 변경 핸들러
   #onChangeFont(event) {
     document.body.style.fontFamily = event.target.value;
+  }
+  // 키보드 입력 핸들러
+  #onKeyUp(event) {
+    this.#keyboardEl
+      .querySelector(`[data-code=${event.code}]`)
+      ?.classList.add("active");
+    // 한글 입력 제어
+    this.#inputGroupEl.classList.toggle(
+      "error",
+      /[ㄱ-ㅎ|ㅏ-ㅣㅣ가-힣]/.test(event.key)
+    );
+  }
+  #onKeyDown(event) {
+    this.#keyboardEl
+      .querySelector(`[data-code=${event.code}]`)
+      ?.classList.remove("active");
+  }
+  #onInput(event) {
+    event.target.value = event.target.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣㅣ가-힣]/, "");
   }
 }
