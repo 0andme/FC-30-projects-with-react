@@ -94,3 +94,20 @@ document.body.style.fontFamily;
 ```js
 /[ㄱ-ㅎ|ㅏ-ㅣㅣ가-힣]/;
 ```
+
+#### 마우스 이벤트
+
+[Element.closest()](https://developer.mozilla.org/ko/docs/Web/API/Element/closest)
+
+[Function.prototype.bind()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+
+- html 속성 data-val = js 에서 dataset.val로 접근 가능
+- `-`외에도 `-` `.` `:` `_` 가능
+
+```html
+<div class="key" data-code="KeyQ" data-val="q">Q</div>
+```
+
+```js
+Element?.dataset.val;
+```
