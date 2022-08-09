@@ -5,6 +5,8 @@ export class Keyboard {
   #keyboardEl;
   #inputGroupEl;
   #inputEl;
+  #keyPress = false;
+  #mouseDown = false;
   constructor() {
     this.#assignElement();
     this.#addEvent();
@@ -21,12 +23,15 @@ export class Keyboard {
     this.#switchEl.addEventListener("change", this.#onChangeTheme);
     this.#fontSelectEl.addEventListener("change", this.#onChangeFont);
     // 키 입력 이벤트
-    document.addEventListener("keydown", this.#onKeyUp.bind(this));
-    document.addEventListener("keyup", this.#onKeyDown.bind(this));
+    document.addEventListener("keydown", this.#onKeyDown.bind(this));
+    document.addEventListener("keyup", this.#onKeyUp.bind(this));
     //  입력된 한글을 빈 스트링으로 변경
     this.#inputEl.addEventListener("input", this.#onInput);
     // 마우스 이벤트
-    this.#keyboardEl.addEventListener("mousedown", this.#onMouseDown);
+    this.#keyboardEl.addEventListener(
+      "mousedown",
+      this.#onMouseDown.bind(this)
+    );
     document.addEventListener("mouseup", this.#onMouseUp.bind(this));
   }
   // 테마 변경 핸들러
@@ -42,6 +47,8 @@ export class Keyboard {
   }
   // 키보드 입력 핸들러
   #onKeyUp(event) {
+    if (this.#mouseDown) return;
+    this.#keyPress = false;
     this.#keyboardEl
       .querySelector(`[data-code=${event.code}]`)
       ?.classList.add("active");
@@ -53,6 +60,8 @@ export class Keyboard {
     );
   }
   #onKeyDown(event) {
+    if (this.#mouseDown) return;
+    this.#keyPress = true;
     this.#keyboardEl
       .querySelector(`[data-code=${event.code}]`)
       ?.classList.remove("active");
@@ -63,9 +72,13 @@ export class Keyboard {
   }
   // 마우스 이벤트 핸들러
   #onMouseDown(event) {
+    if (this.#keyPress) return;
+    this.#mouseDown = true;
     event.target.closest("div.key")?.classList.add("active");
   }
   #onMouseUp(event) {
+    if (this.#keyPress) return;
+    this.#mouseDown = false;
     const keyEl = event.target.closest("div.key");
     const isActive = !!keyEl?.classList.contains("active");
     const val = keyEl?.dataset.val;
