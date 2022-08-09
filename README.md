@@ -73,8 +73,24 @@ command+shift+P -> preferences open workspace settings
 
 #### 폰트 변경 기능
 
-document.body.style.fontFamily
+```js
+document.body.style.fontFamily;
+```
 
 #### 이벤트 버블링
 
 [event.bubbles](https://developer.mozilla.org/ko/docs/Web/API/Event/bubbles)
+
+#### 키보드 이벤트
+
+[? < Optional chaining](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+
+[RegExp.prototype.test())](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test)
+
+[Element.classList.toggle](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList)
+
+한글 입력 정규식
+
+```js
+/[ㄱ-ㅎ|ㅏ-ㅣㅣ가-힣]/;
+```
