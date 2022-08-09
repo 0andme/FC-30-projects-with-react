@@ -57,9 +57,11 @@ export class Keyboard {
       .querySelector(`[data-code=${event.code}]`)
       ?.classList.remove("active");
   }
+  // 입력창 핸들러
   #onInput(event) {
     event.target.value = event.target.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣㅣ가-힣]/, "");
   }
+  // 마우스 이벤트 핸들러
   #onMouseDown(event) {
     event.target.closest("div.key")?.classList.add("active");
   }
