@@ -4,6 +4,7 @@ export class Keyboard {
   #containerEl;
   #keyboardEl;
   #inputGroupEl;
+  #inputEl;
   constructor() {
     this.#assignElement();
     this.#addEvent();
@@ -14,6 +15,7 @@ export class Keyboard {
     this.#fontSelectEl = this.#containerEl.querySelector("#font");
     this.#keyboardEl = this.#containerEl.querySelector("#keyboard");
     this.#inputGroupEl = this.#containerEl.querySelector("#input-group");
+    this.#inputEl = this.#inputGroupEl.querySelector("#input");
   }
   #addEvent() {
     this.#switchEl.addEventListener("change", this.#onChangeTheme);
@@ -33,6 +35,13 @@ export class Keyboard {
       this.#keyboardEl
         .querySelector(`[data-code=${event.code}]`)
         ?.classList.remove("active");
+    });
+    //  입력된 한글을 빈 스트링으로 변경
+    this.#inputEl.addEventListener("input", (event) => {
+      this.#inputEl.value = this.#inputEl.value.replace(
+        /[ㄱ-ㅎ|ㅏ-ㅣㅣ가-힣]/,
+        ""
+      );
     });
   }
   // 테마 변경 핸들러
