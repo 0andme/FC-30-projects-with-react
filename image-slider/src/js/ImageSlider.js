@@ -44,10 +44,24 @@ export default class ImageSlider {
 
   addEvent() {
     this.nextBtnEl.addEventListener('click', this.moveToRight.bind(this));
+    this.previousBtnEl.addEventListener('click', this.moveToLeft.bind(this));
   }
 
   moveToRight() {
     this.#currentPosition += 1;
+    if (this.#currentPosition === this.#sliderNumber) {
+      this.#currentPosition = 0;
+    }
+    this.sliderListEl.style.left = `-${
+      this.#currentPosition * this.#sliderWidth
+    }px`;
+  }
+
+  moveToLeft() {
+    this.#currentPosition -= 1;
+    if (this.#currentPosition === -1) {
+      this.#currentPosition = this.#sliderNumber - 1;
+    }
     this.sliderListEl.style.left = `-${
       this.#currentPosition * this.#sliderWidth
     }px`;
