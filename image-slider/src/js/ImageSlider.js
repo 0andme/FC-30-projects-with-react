@@ -50,6 +50,10 @@ export default class ImageSlider {
   addEvent() {
     this.nextBtnEl.addEventListener('click', this.moveToRight.bind(this));
     this.previousBtnEl.addEventListener('click', this.moveToLeft.bind(this));
+    this.indicatorWrapEl.addEventListener(
+      'click',
+      this.onClickIndicator.bind(this),
+    );
   }
 
   moveToRight() {
@@ -90,5 +94,16 @@ export default class ImageSlider {
     this.indicatorWrapEl
       .querySelector(`ul li:nth-child(${this.#currentPosition + 1})`)
       .classList.add('active');
+  }
+
+  onClickIndicator(event) {
+    const indexPosition = parseInt(event.target.dataset.index, 10);
+    if (Number.isInteger(indexPosition)) {
+      this.#currentPosition = indexPosition;
+      this.sliderListEl.style.left = `-${
+        this.#currentPosition * this.#sliderWidth
+      }px`;
+      this.setIndicatior();
+    }
   }
 }
