@@ -13,12 +13,15 @@ export default class ImageSlider {
 
   previousBtnEl;
 
+  indicatorWrapEl;
+
   constructor() {
     this.assignElement();
     this.initSliderNumber();
     this.initSliderWidth();
     this.initSliderListWidth();
     this.addEvent();
+    this.createIndicatior();
   }
 
   assignElement() {
@@ -26,6 +29,7 @@ export default class ImageSlider {
     this.sliderListEl = this.sliderWrapEl.querySelector('#slider');
     this.nextBtnEl = this.sliderWrapEl.querySelector('#next');
     this.previousBtnEl = this.sliderWrapEl.querySelector('#previous');
+    this.indicatorWrapEl = this.sliderWrapEl.querySelector('#indicator-wrap');
   }
 
   initSliderNumber() {
@@ -65,5 +69,16 @@ export default class ImageSlider {
     this.sliderListEl.style.left = `-${
       this.#currentPosition * this.#sliderWidth
     }px`;
+  }
+
+  createIndicatior() {
+    const docFragment = document.createDocumentFragment();
+
+    for (let i = 0; i < this.#sliderNumber; i += 1) {
+      const li = document.createElement('li');
+      li.dataset.index = i;
+      docFragment.appendChild(li);
+    }
+    this.indicatorWrapEl.querySelector('ul').appendChild(docFragment);
   }
 }
