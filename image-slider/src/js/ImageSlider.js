@@ -22,6 +22,7 @@ export default class ImageSlider {
     this.initSliderListWidth();
     this.addEvent();
     this.createIndicatior();
+    this.setIndicatior();
   }
 
   assignElement() {
@@ -59,6 +60,7 @@ export default class ImageSlider {
     this.sliderListEl.style.left = `-${
       this.#currentPosition * this.#sliderWidth
     }px`;
+    this.setIndicatior();
   }
 
   moveToLeft() {
@@ -69,6 +71,7 @@ export default class ImageSlider {
     this.sliderListEl.style.left = `-${
       this.#currentPosition * this.#sliderWidth
     }px`;
+    this.setIndicatior();
   }
 
   createIndicatior() {
@@ -80,5 +83,12 @@ export default class ImageSlider {
       docFragment.appendChild(li);
     }
     this.indicatorWrapEl.querySelector('ul').appendChild(docFragment);
+  }
+
+  setIndicatior() {
+    this.indicatorWrapEl.querySelector('li.active')?.classList.remove('active');
+    this.indicatorWrapEl
+      .querySelector(`ul li:nth-child(${this.#currentPosition + 1})`)
+      .classList.add('active');
   }
 }
