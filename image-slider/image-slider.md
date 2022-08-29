@@ -34,3 +34,11 @@ module: {
     ],
   },
 ```
+
+#### 이전 다음 버튼 기능
+
+슬라이드 변경 시 css:left 속성 값을 이용. 이때 left값의 변경시 transition을 주게 되는데 이때 전 상태에 left 속성이 없었다면 transition 적용이 안됨
+
+[CSS Transitions](https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions)
+
+[요소 내부너비 Element.clientWidth](https://developer.mozilla.org/ko/docs/Web/API/Element/clientWidth)
