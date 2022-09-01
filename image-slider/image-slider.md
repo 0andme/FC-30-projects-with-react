@@ -56,3 +56,23 @@ module: {
 Number.isInteger() 주어진 값이 정수인지 판별
 
 [Number.isInteger()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)
+
+#### setTimeOut과 setInterval에 대한 이해
+
+**setTimeout(func,time,param1,param2,...)**
+
+첫번째 인자로 들어온 함수를 두번째 인자로 들어온 숫자 값만큼의 *딜레이 이후 실행*하는 함수. 세번째 인자부터는 첫번째 함수에 전달할 파라미터 값.
+
+setTimeout 함수의 리턴값은 id 값. clearTimeout 함수의 해당 id값을 넣어주면 실행이 멈춘다.
+
+[공식문서 setTimeout()](https://developer.mozilla.org/ko/docs/Web/API/setTimeout)
+
+[공식문서 clearTimeout()](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout)
+
+**setInterval(func,time,param1,param2,...)**
+
+첫번째 인자의 함수를 두번째 인자 값으로 _일정 간격_ 반복 실행하는 함수
+
+[공식문서 setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/setInterval)
+
+[공식문서 clearInterval()](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval)
