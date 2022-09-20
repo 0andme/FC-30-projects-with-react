@@ -5,6 +5,10 @@ export default class ImageSlider {
 
   #sliderWidth = 0;
 
+  #intervalId;
+
+  #autoPlay = true;
+
   sliderListEl;
 
   sliderWrapEl;
@@ -15,6 +19,8 @@ export default class ImageSlider {
 
   indicatorWrapEl;
 
+  controlWrapEl;
+
   constructor() {
     this.assignElement();
     this.initSliderNumber();
@@ -23,6 +29,7 @@ export default class ImageSlider {
     this.addEvent();
     this.createIndicatior();
     this.setIndicatior();
+    this.initAutoPlay();
   }
 
   assignElement() {
@@ -31,6 +38,7 @@ export default class ImageSlider {
     this.nextBtnEl = this.sliderWrapEl.querySelector('#next');
     this.previousBtnEl = this.sliderWrapEl.querySelector('#previous');
     this.indicatorWrapEl = this.sliderWrapEl.querySelector('#indicator-wrap');
+    this.controlWrapEl = this.sliderWrapEl.querySelector('#control-wrap');
   }
 
   initSliderNumber() {
@@ -54,6 +62,7 @@ export default class ImageSlider {
       'click',
       this.onClickIndicator.bind(this),
     );
+    this.controlWrapEl.addEventListener('click', this.togglePlay.bind(this));
   }
 
   moveToRight() {
@@ -104,6 +113,24 @@ export default class ImageSlider {
         this.#currentPosition * this.#sliderWidth
       }px`;
       this.setIndicatior();
+    }
+  }
+
+  initAutoPlay() {
+    this.#intervalId = setInterval(this.moveToRight.bind(this), 3000);
+  }
+
+  togglePlay(event) {
+    if (event.target.dataset.status === 'play') {
+      this.#autoPlay = true;
+      this.controlWrapEl.classList.add('play');
+      this.controlWrapEl.classList.remove('pause');
+      this.initAutoPlay();
+    } else if (event.target.dataset.status === 'pause') {
+      this.#autoPlay = false;
+      this.controlWrapEl.classList.add('pause');
+      this.controlWrapEl.classList.remove('play');
+      clearInterval(this.#intervalId);
     }
   }
 }
