@@ -74,8 +74,10 @@ export default class ImageSlider {
       this.#currentPosition * this.#sliderWidth
     }px`;
 
-    clearInterval(this.#intervalId);
-    this.#intervalId = setInterval(this.moveToRight.bind(this), 3000);
+    if (this.#autoPlay) {
+      clearInterval(this.#intervalId);
+      this.#intervalId = setInterval(this.moveToRight.bind(this), 3000);
+    }
     this.setIndicatior();
   }
 
@@ -87,8 +89,10 @@ export default class ImageSlider {
     this.sliderListEl.style.left = `-${
       this.#currentPosition * this.#sliderWidth
     }px`;
-    clearInterval(this.#intervalId);
-    this.#intervalId = setInterval(this.moveToRight.bind(this), 3000);
+    if (this.#autoPlay) {
+      clearInterval(this.#intervalId);
+      this.#intervalId = setInterval(this.moveToRight.bind(this), 3000);
+    }
     this.setIndicatior();
   }
 
