@@ -1,4 +1,4 @@
-### 개발 환경 설정
+### 1. 개발 환경 설정
 
 - snowpack
 - eslint&prettier
@@ -24,6 +24,24 @@ npm i -D @snowpack/plugin-sass
 [.prettierrc.json](./.prettierrc.json)
 [.eslintignore](./.eslintignore)
 [.eslintrc.json](./.eslintrc.json)
+
+#### 2. html (s)css
+
+**grid 속성**
+
+grid는 2차원 배열
+
+```css
+display: grid;
+grid-template-columns: repeat(7, 1fr); /*1fr (fraction)*/
+grid-column-start: 7;
+```
+
+[MD CSS 그리드 레이아웃](https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Grid_Layout)
+
+[MDN grid-template-columns](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+
+[MDN grid-column-start](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start)
 
 ##### 기타
 
