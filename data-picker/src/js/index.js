@@ -39,6 +39,7 @@ class DataPicker {
   calenderDatesEl;
 
   constructor() {
+    this.initCalendarDate();
     this.assignElement();
     this.addEvent();
   }
@@ -76,6 +77,74 @@ class DataPicker {
   //  func | input 클릭시  캘린더 on/off
   toggleCalenter() {
     this.calenderEl.classList.toggle("active");
+    this.updateMonth();
+    this.updateDates();
+  }
+  // func | 캘린더의 월/달 변경
+  updateMonth() {
+    this.monthContentEl.textContent = `${this.#calenderDate.year + 1} ${
+      this.monthData[this.#calenderDate.month]
+    }`;
+  }
+  // func | 캘린더의 날짜들 변경
+  updateDates() {
+    this.calenderDatesEl.innerHTML = "";
+    // 해당 년월에 총 몇일이 있는지 구함
+    const numberOfDates = new Date(
+      this.#calenderDate.year,
+      this.#calenderDate.month + 1,
+      0
+    ).getDate();
+
+    const fragement = new DocumentFragment();
+    for (let i = 0; i < numberOfDates; i++) {
+      const dateEl = document.createElement("div");
+      dateEl.classList.add("date");
+      dateEl.textContent = i + 1;
+      dateEl.dataset.date = i + 1;
+      fragement.appendChild(dateEl);
+    }
+    // 1월이 몇 요일에 시작하는지 설정
+    // grid-column-start 속성 사용
+    // new Date(년,월,일).getDay() :  (0~6)사이의 값
+    fragement.firstChild.style.gridColumnStart =
+      new Date(this.#calenderDate.year, this.#calenderDate.month, 1).getDay() +
+      1;
+
+    this.calenderDatesEl.appendChild(fragement);
+    this.colorSaturday();
+    this.colorSunday();
+  }
+  // func | 토요일에 해당되는 날짜의 text 색상 변경
+  colorSaturday() {
+    const saturdayEls = this.calenderDatesEl.querySelectorAll(
+      `.date:nth-child(7n+${
+        7 -
+        new Date(this.#calenderDate.year, this.#calenderDate.month, 1).getDay()
+      })`
+    );
+
+    for (let i = 0; i < saturdayEls.length; i++) {
+      saturdayEls[i].style.color = "blue";
+    }
+  }
+  // func | 일요일에 해당되는 날짜의 text 색상 변경
+  colorSunday() {
+    const sundayEls = this.calenderDatesEl.querySelectorAll(
+      `.date:nth-child(7n+${
+        (8 -
+          new Date(
+            this.#calenderDate.year,
+            this.#calenderDate.month,
+            1
+          ).getDay()) %
+        7
+      })`
+    );
+
+    for (let i = 0; i < sundayEls.length; i++) {
+      sundayEls[i].style.color = "red";
+    }
   }
 }
 
