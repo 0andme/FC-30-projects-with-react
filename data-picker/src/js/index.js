@@ -114,6 +114,7 @@ class DataPicker {
     this.calenderDatesEl.appendChild(fragement);
     this.colorSaturday();
     this.colorSunday();
+    this.markToday();
   }
   // func | 토요일에 해당되는 날짜의 text 색상 변경
   colorSaturday() {
@@ -144,6 +145,22 @@ class DataPicker {
 
     for (let i = 0; i < sundayEls.length; i++) {
       sundayEls[i].style.color = "red";
+    }
+  }
+  // func | 오늘 날짜에 마크하기
+  markToday() {
+    const currentDate = new Date();
+    const cuerrentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+    const today = currentDate.getDate();
+
+    if (
+      currentYear == this.#calenderDate.year &&
+      cuerrentMonth == this.#calenderDate.month
+    ) {
+      this.calenderDatesEl
+        .querySelector(`[data-date='${today}']`)
+        .classList.add("today");
     }
   }
 }
