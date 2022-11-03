@@ -64,7 +64,7 @@ class DataPicker {
     this.calenderEl = this.datePickerEl.querySelector("#calendar");
     this.calenderMonthEl = this.calenderEl.querySelector("#month");
     this.monthContentEl = this.calenderMonthEl.querySelector("#content");
-    this.nextBtnEl = this.calenderMonthEl.querySelector("#nexy");
+    this.nextBtnEl = this.calenderMonthEl.querySelector("#next");
     this.prevBtnEl = this.calenderMonthEl.querySelector("#prev");
     this.calenderDatesEl = this.calenderEl.querySelector("#dates");
   }
@@ -72,6 +72,8 @@ class DataPicker {
   addEvent() {
     // input 클릭시  달력 활성화
     this.dateInputEl.addEventListener("click", this.toggleCalenter.bind(this));
+    this.nextBtnEl.addEventListener("click", this.moveToNextMonth.bind(this));
+    this.prevBtnEl.addEventListener("click", this.moveToPrevMonth.bind(this));
   }
 
   //  func | input 클릭시  캘린더 on/off
@@ -162,6 +164,25 @@ class DataPicker {
         .querySelector(`[data-date='${today}']`)
         .classList.add("today");
     }
+  }
+  // func | 달 변경
+  moveToNextMonth() {
+    this.#calenderDate.month++;
+    if (this.#calenderDate.month > 11) {
+      this.#calenderDate.month = 0;
+      this.#calenderDate.year++;
+    }
+    this.updateMonth();
+    this.updateDates();
+  }
+  moveToPrevMonth() {
+    this.#calenderDate.month--;
+    if (this.#calenderDate.month < 0) {
+      this.#calenderDate.month = 11;
+      this.#calenderDate.year--;
+    }
+    this.updateMonth();
+    this.updateDates();
   }
 }
 
