@@ -208,6 +208,7 @@ class DataPicker {
       };
       this.dateInputEl.textContent = this.formatDate(this.selectedDate.data);
       this.dateInputEl.dataset.value = this.selectedDate.data;
+      this.calenderEl.classList.remove("active");
     }
   }
 
