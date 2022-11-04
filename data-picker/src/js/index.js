@@ -93,6 +93,9 @@ class DataPicker {
 
   //  func | input 클릭시  캘린더 on/off
   toggleCalenter() {
+    if (this.calenderEl.classList.contains("active")) {
+      this.#calenderDate = { ...this.selectedDate };
+    }
     this.calenderEl.classList.toggle("active");
     this.updateMonth();
     this.updateDates();
