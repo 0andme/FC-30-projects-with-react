@@ -207,6 +207,7 @@ class DataPicker {
         date: eventTarget.dataset.date,
       };
       this.dateInputEl.textContent = this.formatDate(this.selectedDate.data);
+      this.dateInputEl.dataset.value = this.selectedDate.data;
     }
   }
 
