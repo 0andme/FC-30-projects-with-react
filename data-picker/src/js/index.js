@@ -41,6 +41,8 @@ class DataPicker {
   constructor() {
     this.initCalendarDate();
     this.assignElement();
+    this.initSelectedDate();
+    this.setDateInput();
     this.addEvent();
   }
 
@@ -67,6 +69,15 @@ class DataPicker {
     this.nextBtnEl = this.calenderMonthEl.querySelector("#next");
     this.prevBtnEl = this.calenderMonthEl.querySelector("#prev");
     this.calenderDatesEl = this.calenderEl.querySelector("#dates");
+  }
+  // func | selectedDate 초기화
+  initSelectedDate() {
+    this.selectedDate = { ...this.#calenderDate };
+  }
+  //  func |  Input 요소 초기화
+  setDateInput() {
+    this.dateInputEl.textContent = this.formatDate(this.selectedDate.data);
+    this.dateInputEl.dataset.value = this.selectedDate.data;
   }
   // func | 요소와 이벤트 연결
   addEvent() {
@@ -206,8 +217,7 @@ class DataPicker {
         month: this.#calenderDate.month,
         date: eventTarget.dataset.date,
       };
-      this.dateInputEl.textContent = this.formatDate(this.selectedDate.data);
-      this.dateInputEl.dataset.value = this.selectedDate.data;
+      this.setDateInput();
       this.calenderEl.classList.remove("active");
     }
   }
