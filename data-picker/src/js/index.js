@@ -132,6 +132,18 @@ class DataPicker {
     this.colorSaturday();
     this.colorSunday();
     this.markToday();
+    this.markSelectedDate();
+  }
+  // func | 날짜 선택 이후 캘린더 off-> 다시 오픈 시 선택 날짜 유지
+  markSelectedDate() {
+    if (
+      this.selectedDate.year === this.#calenderDate.year &&
+      this.selectedDate.month === this.#calenderDate.month
+    ) {
+      this.calenderDatesEl
+        .querySelector(`[data-date='${this.selectedDate.date}']`)
+        .classList.add("selected");
+    }
   }
   // func | 토요일에 해당되는 날짜의 text 색상 변경
   colorSaturday() {
