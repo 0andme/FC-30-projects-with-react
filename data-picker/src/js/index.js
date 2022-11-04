@@ -74,6 +74,10 @@ class DataPicker {
     this.dateInputEl.addEventListener("click", this.toggleCalenter.bind(this));
     this.nextBtnEl.addEventListener("click", this.moveToNextMonth.bind(this));
     this.prevBtnEl.addEventListener("click", this.moveToPrevMonth.bind(this));
+    this.calenderDatesEl.addEventListener(
+      "click",
+      this.onClickSelectDate.bind(this)
+    );
   }
 
   //  func | input 클릭시  캘린더 on/off
@@ -183,6 +187,42 @@ class DataPicker {
     }
     this.updateMonth();
     this.updateDates();
+  }
+  // func | 각각의 date 클릭시 inPut의 text를 변경
+  onClickSelectDate(e) {
+    const eventTarget = e.target;
+    if (eventTarget.dataset.date) {
+      this.calenderDatesEl
+        .querySelector(".selected")
+        ?.classList.remove("selected");
+      eventTarget.classList.add("selected");
+      this.selectedDate = {
+        data: new Date(
+          this.#calenderDate.year,
+          this.#calenderDate.month,
+          eventTarget.dataset.date
+        ),
+        year: this.#calenderDate.year,
+        month: this.#calenderDate.month,
+        date: eventTarget.dataset.date,
+      };
+      this.dateInputEl.textContent = this.formatDate(this.selectedDate.data);
+    }
+  }
+
+  // func | 날짜정보를 특정 포맷의 문자열로 리턴
+  formatDate(dateData) {
+    let date = dateData.getDate();
+    let month = dateData.getMonth() + 1;
+    let year = dateData.getFullYear();
+
+    if (date < 10) {
+      date = `0${date}`;
+    }
+    if (month < 10) {
+      month = `0${month}`;
+    }
+    return `${year}/${month}/${date}`;
   }
 }
 
